@@ -130,3 +130,73 @@ async function analyzeWithAI(text, title) {
 }
 
 
+/* Main function */
+async function main() {
+    console.log(`🚀 Starting AI data enrichment process with ${apiKeys.length} API keys...`);
+
+    // Initialize first key without incrementing
+    currentKeyIndex = 0;
+    const genAI = new GoogleGenerativeAI(apiKeys[currentKeyIndex]);
+    model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
+    console.log(`🔑 Using API key #1.`);
+
+    // check number of pre-existing data
+    const existingData = loadJsonFile(OUTPUT_JSON_PATH);
+    console.log(`🔍 Found ${existingData.length} articles already processed.`);
+
+    console.log(`📡 Fetching CSV data from URL...`);
+    const response = await axios.get(CSV_URL);
+    const allArticles = Papa.parse(response.data, { header: true }).data;
+
+    const startIndex = existingData.length;
+    const articlesToProcess = allArticles.slice(startIndex, startIndex + BATCH_SIZE);
+
+    if (articlesToProcess.length === 0) {
+        console.log("✅ All articles processed. Nothing to do!");
+        return;
+    }
+
+    console.log(`⚙️  Processing a new batch of ${articlesToProcess.length} articles (from #${startIndex + 1} to #${startIndex + articlesToProcess.length})...`);
+
+    const newlyProcessedData = [];
+    try {
+        for (const [index, row] of articlesToProcess.entries()) {
+            if (!row || !row.Title || !row.Link) continue; // Skip empty or invalid rows
+            console.log(`\nProcessing: ${row.Title}`);
+
+            // Scrape full text
+            const text = await scrapeFullText(row.Link);
+            if (!text) continue;
+
+            // if scraping was successful then calling AI analysis function
+            const aiData = await analyzeWithAI(text, row.Title);
+            if (aiData) {
+                console.log(`  ✅ AI analysis successful! Category: ${aiData.category}`);
+                newlyProcessedData.push({
+                    id: String(startIndex + index + 1),
+                    title: row.Title,
+                    url: row.Link,
+                    ...aiData,
+                    organism: 'Various',
+                    experiment: 'Multiple',
+                    duration: 'N/A',
+                    location: 'Space & Ground Studies',
+                    methodology: 'Refer to full publication.',
+                    findings: [aiData.summary],
+                    implications: ['Refer to the full publication for detailed implications.'],
+                    relatedStudies: [],
+                });
+            }
+            await new Promise(resolve => setTimeout(resolve, 1000)); // Rate limit delay
+        }
+    } catch (error) {
+        console.error(`\nScript stopped unexpectedly: ${error.message}`);
+    }
+
+    // combining existing data and new data
+    const combinedData = [...existingData, ...newlyProcessedData];
+    fs.writeFileSync(OUTPUT_JSON_PATH, JSON.stringify(combinedData, null, 2));
+    console.log(`\n\n🎉 Success! Saved a total of ${combinedData.length} articles to ${OUTPUT_JSON_PATH}`);
+}
+
+main();
