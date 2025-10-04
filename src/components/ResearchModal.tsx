@@ -29,6 +29,18 @@ const ResearchModal: React.FC<ResearchModalProps> = ({ research, onClose }) => {
               </div>
               <h1 className="text-2xl font-bold text-slate-100 mb-4">{research.title}</h1>
 
+              {research.url && (
+                <a
+                  href={research.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center space-x-2 mb-4 px-4 py-2 bg-gray-800/60 hover:bg-gray-700/60 border border-slate-700 rounded-lg text-blue-300 hover:text-blue-200 transition-colors"
+                >
+                  <ExternalLink className="w-4 h-4"/>
+                  <span>Read Full Publication on NCBI</span>
+                </a>
+              )}
+
               
             </div>
           </div>
