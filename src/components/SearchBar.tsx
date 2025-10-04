@@ -41,7 +41,7 @@ const SearchBar:React.FC<SearchBarProps>=({searchTerm,onSearchChange,resultCount
             {/*--- Right-side AI tag ---*/}
             <div className ="flex items-center space-x-2 pr-2">
               <div className=" flex items-center space-x-1 px-3 py-1 bg-gradient-to-r from-cyan-500/20 to-violet-500/20 rounded-lg border border-blue-500/30">
-                <sparkles className="w-4 h-4 text-blue-400"/>
+                <Sparkles className="w-4 h-4 text-blue-400"/>
                 {/*COMPLETED:added text to the AI tag*/}
                 <span className="text-sm text-blue-300 font-medium">AI</span>
               </div>
@@ -56,7 +56,7 @@ const SearchBar:React.FC<SearchBarProps>=({searchTerm,onSearchChange,resultCount
       {searchTerm && (
          <div className= " absolute top-full left-0 right-0 mt-2 p-3 bg-gray-900/90 backdrop-blur-sm border border-gray-700/50 rounded-lg">
            <p className ="text-sm text-gray-300">
-           Found <span className ="font-semibold text-blue-400>{resultCount}</span> research{resultCount === 1? 'paper':'papers'} matching "<span className="text-white font-medium"> {searchTerm}</span>"
+           Found <span className ="font-semibold text-blue-400">{resultCount}</span> research{resultCount === 1? 'paper':'papers'} matching "<span className="text-white font-medium"> {searchTerm}</span>"
          </p>
         </div>
       )}
@@ -70,6 +70,7 @@ export default SearchBar;
             
         
      
+
 
 
 
