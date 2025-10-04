@@ -17,7 +17,7 @@ const SearchBar:React.FC<SearchBarProps>=({searchTerm,onSearchChange,resultCount
     <div className="relative max-w-2xl mx-auto">
       {/*---outer wrapper with hover glow effect---*/}
       <div className="relative group">
-        <div className ="absolute inset-0 bg-gradient-to-r from-blue-500/20 to-purple-500/20 rounded-2xl blur-xl group-hover:blur-2xl transtition-all duration-300 opacity-70 group-hover:opacity-100"/>
+        <div className ="absolute inset-0 bg-gradient-to-r from-blue-500/20 to-purple-500/20 rounded-2xl blur-xl group-hover:blur-2xl transition-all duration-300 opacity-70 group-hover:opacity-100"/>
 
         {/*---Main Search bar ---*/}
         <div className= "relative bg-gray-900/80 backdrop-blur-sm border border-gray-700/50 rounded-2xl p-2 group-hover:border-gray-600/50 transition-colors">
@@ -31,7 +31,7 @@ const SearchBar:React.FC<SearchBarProps>=({searchTerm,onSearchChange,resultCount
               type="text"
               value={searchTerm}
               onChange={(e)=> onSearchChange(e.target.value)}
-              //IMPROVED:More relavent placeholdertext
+              //IMPROVED:clear placeholder so users know they can search by keywords
               placeholder="Search by title or keyword(e.g., radiation)"
               //ADDED:Aria-label for better accessibility
               aria-label="Search research papers"
@@ -70,6 +70,7 @@ export default SearchBar;
             
         
      
+
 
 
 
