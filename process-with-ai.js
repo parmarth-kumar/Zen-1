@@ -54,3 +54,40 @@ function loadJsonFile(path) {
 }
 
 
+/* Scrapes the full text content from a given URL (PMC / PubMed Central). */
+async function scrapeFullText(url) {
+    try {
+        const { data } = await axios.get(url, { headers: { 'User-Agent': 'Mozilla/5.0' } });
+        const $ = cheerio.load(data);
+
+        let textParts = [];
+
+        // Abstract
+        const abstract = $('section.abstract, div.abstract, section#abstract1').text().trim();
+        if (abstract) textParts.push("Abstract:\n" + abstract);
+      
+        // Main body
+        const body = $('section.body.main-article-body').text().trim();
+        if (body) textParts.push("Main Body:\n" + body);
+      
+        // Fallback selectors (just in case some PMC pages differ)
+        if (textParts.length === 0) {
+            const fallback = $('div#body, div#maincontent, div.journal-article').text().trim();
+            if (fallback) textParts.push(fallback);
+        }
+        let text = textParts.join("\n\n").replace(/\s\s+/g, ' ').slice(0, 30000);
+
+        if (!text || text.length < 200) {
+            console.warn(`⚠️ Scraper found little/no text for ${url}`);
+        }
+
+        return text;
+    } catch (error) {
+        console.error(`❌ Failed to scrape ${url}: ${error.message}`);
+        return null;
+    }
+}
+
+
+
+
