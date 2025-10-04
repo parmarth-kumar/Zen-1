@@ -20,10 +20,27 @@ const SearchBar:React.FC<SeacrBarProps>=({searchTerm,onSearchChange,resultcount}
             <input
               type="text"
               value={searchTerm}
-              onChange={(e)=> onSearchChange(e.target.value)} </input>
+              onChange={(e)=> onSearchChange(e.target.value)}
+              //IMPROVED:More relavent placeholdertext
+              placeholder="Search by title or keyword(e.g., radiation)"
+              //ADDED:Aria-label for better accessibility
+              aria-label="Search research papers"
+              className="flex-1 bg-transparent text-white placeholder-gray-400 px-2 py-3 focus:outline-none text-lg"
+              />
+            <div className ="flex items-center space-x-2 pr-2">
+              <div className=" flex items-center space-x-1 px-3 py-1 bg-gradient-to-r from-cyan-500/20 to-violet-500/20 rounded-lg border border-blue-500/30">
+                <sparkles className="w-4 h-4 text-blue-400"/>
+                {/*COMPLETED:added text to the AI tag*/}
+                <span className="text-sm text-blue-300 font-medium">AI</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
 
             
         
      
+
 
 
