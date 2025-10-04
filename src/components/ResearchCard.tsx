@@ -1,21 +1,21 @@
-//This is going to be a component file
 import React from 'react';
 import { ChevronRight, Calendar } from 'lucide-react';
-import { ResearchItem, categories } from 'https://github.com/parmarth-kumar/Zen-1/blob/f834e9ecf88d603c95307cb903085841678eed6f/src/data/research-data.ts'
-//Create interface
+import { ResearchItem, categories } from '../data/research-data';
+
 interface ResearchCardProps {
   research: ResearchItem;
   onClick: (research: ResearchItem) => void;
 }
+
 const ResearchCard: React.FC<ResearchCardProps> = ({ research, onClick }) => {
   const category = categories.find(cat => cat.id === research.category);
-
-  return(
-    <div
-      className= "bg-slate-900/60 border backdrop-blur-sm border-slate-800 rounded-xl p-6 hover:border-gray-700/50 hover:bg-gray-900/70 transition-all duration-300 cursor-pointer hover:shadow-lg hover:shadow-blue-500/10 flex flex-col h-full"
+  
+  return (
+    <div 
+      className="bg-slate-900/60 border backdrop-blur-sm border-slate-800 rounded-xl p-6 hover:border-gray-700/50 hover:bg-gray-900/70 transition-all duration-300 cursor-pointer hover:shadow-lg hover:shadow-blue-500/10 flex flex-col h-full"
       onClick={() => onClick(research)}
     >
-      <div className="flex-grow"
+      <div className="flex-grow">
         <div className="flex items-start justify-between mb-4">
           <div className="flex items-center space-x-2">
             {category && <category.icon className="w-5 h-5 text-cyan-400 flex-shrink-0" />}
@@ -23,19 +23,27 @@ const ResearchCard: React.FC<ResearchCardProps> = ({ research, onClick }) => {
               {category?.name}
             </span>
           </div>
-          <ChevronRight className="w-5 h-5 text-slate-400 group-hover:text-white transition-colors"/>
+          <ChevronRight className="w-5 h-5 text-slate-400 group-hover:text-white transition-colors" />
         </div>
-      
-        <h3 className="text-lg font-semibold text-slate-100 mb-3 group=hover:text-cyan-300 transition-colors line-clamp-2">
+
+        <h3 className="text-lg font-semibold text-slate-100 mb-3 group-hover:text-cyan-300 transition-colors line-clamp-2">
           {research.title}
         </h3>
-      
+
         <p className="text-slate-400 text-sm mb-4 line-clamp-3 leading-relaxed">
           {research.summary}
         </p>
       </div>
-    
-    
+
+      <div className="flex-shrink-0">
+        {/* SIMPLIFIED: Display only the year as the primary metadata */}
+        <div className="flex items-center space-x-1 text-xs text-slate-500 mb-4">
+          <Calendar className="w-3 h-3" />
+          <span>{research.year}</span>
+        </div>
+
+        
+
   
 
 
