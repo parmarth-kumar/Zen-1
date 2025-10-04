@@ -1,4 +1,4 @@
-import React, {useState} from react;
+import React, {useState} from "react";
 import {Filter, ChevronDown} from 'lucide-react';
 import{categories} from '../data/research-data';
 
@@ -8,13 +8,13 @@ interface CategoryFilterProps {
   onCategoryChange: (category: string) => void;//callback when user selects a category
 }
 
-const CategoryFilter: React.FC<CategoryFilterProps>= ({ selectedCategory,onCategoryChange})=>
+const CategoryFilter: React.FC<CategoryFilterProps>= ({ selectedCategory,onCategoryChange})=>{
   //state for dropdown visibility
   const[isOpen,setIsOpen]= useState(false);
 //the full category object for the selected category
 const selectedCategoryData = categories.find(cat =>cat.id === selectedCategory);
 return(
-  <div className="realtive inline-block">
+  <div className="relative inline-block">
     {/*--- Glassy Main Button ---*/}
     <button
       onClick ={()=> setIsOpen(!isOpen)}
@@ -46,7 +46,7 @@ return(
             backdrop-blur-lg
             border border-gray/20 rounded-xl shadow-xl z-50"
             >
-               <div className="p1">
+               <div className="p-1">
                  {/* mao over all categories to show them as dropdown option*/}
                  {categories.map(category => (
                        <button
