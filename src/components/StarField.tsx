@@ -54,8 +54,50 @@ const BioBackground: React.FC =() =>{
       ctx.save();
       ctx.translate(x,y);
       ctx.rotate(angle);
+
+      const helixHeight=400;
+      const spacing = 10;
+      for (let i=0; i<helixHeight; i+=spacing) {
+        const phase =i*0.05 +time*0.02; // animate phase 
+        const offset = Math.sin(phase) *20;
+
+        //left stand 
+        ctx.beginPath();
+        ctx.arc(-offset,i-helixHeight /2,2,0, Math.PI *2);
+        ctx.fillStyle = "rgba(0,255,255,0.6)";
+        ctx.fill();
+        //right stand 
+        ctx.beginPath();
+        ctx.arc(-offset,i-helixHeight /2,2,0, Math.PI *2);
+        ctx.fillStyle = "rgba(255,0,255,0.6)";
+        ctx.fill();
+
+        //rung (connecting lines)
+        ctx.beginPath();
+        ctx.moveTo(-offset, i-helixHeight / 2);
+        ctx.lineTo(offset, i-helixHeight / 2);
+        ctx.strokeStyle = "rgba(255,255,255,0.15)";
+        ctx.lineWidth = 1;
+        ctx.stroke();
+      }
+
+      ctx.restore();
+    };
+    let time =0;
+
+    //Main animation loop 
+    const animate=() => {
+      //clear background 
+      ctx.fillStyle = "rgba(5,10,20,1)";
+      ctx.fillRect(0,0,canvas.width, canvas.height);
+      
+      
+      
+        
+                
       
         
             
+
 
 
