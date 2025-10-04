@@ -44,7 +44,7 @@ return(
             className="absolute top-full right-0 mt-2 w-52 
             bg-gray-900/40 
             backdrop-blur-lg
-            border border-gray/20 rounded-xl shadow-xl z-50"
+            border border-gray-800/60 rounded-xl shadow-xl z-50"
             >
                <div className="p-1">
                  {/* mao over all categories to show them as dropdown option*/}
