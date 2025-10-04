@@ -1,7 +1,7 @@
 //This is going to be a component file
 import React from 'react';
 import { ChevronRight, Calendar } from 'lucide-react';
-import { ResearchItem, categories } from 'src/data/research-data.ts'
+import { ResearchItem, categories } from 'https://github.com/parmarth-kumar/Zen-1/blob/f834e9ecf88d603c95307cb903085841678eed6f/src/data/research-data.ts'
 //Create interface
 interface ResearchCardProps {
   research: ResearchItem;
