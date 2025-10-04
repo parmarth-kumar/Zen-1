@@ -28,8 +28,11 @@ const ResearchCard: React.FC<ResearchCardProps> = ({ research, onClick }) => {
       
         <h3 className="text-lg font-semibold text-slate-100 mb-3 group=hover:text-cyan-300 transition-colors line-clamp-2">
           {research.title}
-        </h3>     
-
+        </h3>
+      
+        <p className="text-slate-400 text-sm mb-4 line-clamp-3 leading-relaxed">
+          {research.summary}
+        </p>
       </div>
     
     
