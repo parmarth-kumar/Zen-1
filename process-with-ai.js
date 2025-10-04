@@ -89,5 +89,44 @@ async function scrapeFullText(url) {
 }
 
 
+/* Analyzing and creating summary/key findings of research paper text with Gemini & handling retries. */
+async function analyzeWithAI(text, title) {
+    const prompt = `
+        You are a research assistant specializing in space biology.
+        Analyze the following research paper text. Based *only* on the text provided, return a JSON object with the following structure:
+        {
+          "summary": "A concise, easy-to-understand summary and key findings of the research (7-10 sentences).",
+          "category": "The most relevant category from this list: [${CATEGORIES.join(', ')}].",
+          "year": "The publication year (as a number). If not found, use ${new Date().getFullYear()}.",
+          "keywords": ["An array of 5-7 relevant keywords."]
+        }
+        
+        Original Title: "${title}"
+        Paper Text: "${text}"
+    `;
+    // 3 retries
+    for (let attempt = 1; attempt <= 3; attempt++) {
+        try {
+            const result = await model.generateContent(prompt);
+            const response = await result.response;
+            const jsonText = response.text().replace(/```json|```/g, '').trim();
+            return JSON.parse(jsonText);
+        } catch (error) {
+            if (error.message.includes('429 Too Many Requests')) {
+                console.warn(`🔑 Quota exceeded for key #${currentKeyIndex + 1}.`);
+                if (!rotateApiKey()) throw new Error("All API keys exhausted.");
+                attempt = 0; // Reset attempts for the new key
+                continue;
+            }
+            console.error(`- AI analysis for "${title}" failed (Attempt ${attempt}/3)`);
+            if (attempt === 3) {
+                console.error(`- ❌ Final attempt failed. Skipping article. Error: ${error.message}`);
+                return null;
+            }
+            await new Promise(resolve => setTimeout(resolve, 2000));
+        }
+    }
+    return null;
+}
 
 
