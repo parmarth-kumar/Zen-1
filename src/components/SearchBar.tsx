@@ -12,7 +12,7 @@ interface SearchBarProps{
 *A styled search input with glowing effect , AI label, and dynamic result count.
 */
 
-const SearchBar:React.FC<SeacrBarProps>=({searchTerm,onSearchChange,resultcount}) =>{
+const SearchBar:React.FC<SearchBarProps>=({searchTerm,onSearchChange,resultcount}) =>{
   return (
     <div className="relative max-w-2xl mx-auto">
       {/*---outer wrapper with hover glow effect---*/}
@@ -70,6 +70,7 @@ export default SearchBar;
             
         
      
+
 
 
 
