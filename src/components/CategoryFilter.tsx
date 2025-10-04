@@ -47,7 +47,7 @@ return(
             border border-gray-800/60 rounded-xl shadow-xl z-50"
             >
                <div className="p-1">
-                 {/* mao over all categories to show them as dropdown option*/}
+                 {/* map over all categories to show them as dropdown option*/}
                  {categories.map(category => (
                        <button
                          key={category.id}
@@ -58,7 +58,7 @@ return(
                          className={`w-full flex items-center space-x-2 px-3 py-2 rounded-lg text-left transition-all 
                          ${selectedCategory === category.id
                            ? 'bg-cyan-500/20 text-cyan-300 shadow-inner border border-cyan-400/30'
-                           : 'hover:bg-gray/10 text-gray-200 hover:text-white'
+                           : 'hover:bg-gray-900/10 text-gray-200 hover:text-white'
                          }`}
                          >
                          {/*Category icon (dynamically passed from data)*/}
