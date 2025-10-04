@@ -13,8 +13,8 @@ import 'detenv/config';
 
 // --- CONFIGURATIONS ---
 const CSV_URL = 'https://raw.githubusercontent.com/jgalazka/SB_publications/main/SB_publication_PMC.csv';
-const OUTPUT_JSON_PATH = './src/data/ai-generated-data.json;
-const BATCH_SIZE = 50; // nos. of research paper proccessed in one go
+const OUTPUT_JSON_PATH = './src/data/ai-generated-data.json';
+const BATCH_SIZE = 50; // nos. of research paper processed in one go
 const CATEGORIESS = ['plant-biology','radiation-effects','human-physiology','microbiology','cellular-biology'];
 
 // --- API & MODEL ---
@@ -41,5 +41,16 @@ function rotateApiKey(increment = true) {
 }
 
 
+/* Load and parse a JSON file */
+function loadJsonFile(path) {
+    if (!fs.existsSync(path)) return [];
+    try {
+        const fileContent = fs.readFileSync(path, 'utf-8');
+        return fileContent ? JSON.parse(fileContent) : [];
+    } catch (e) {
+        console.error(`⚠️ Could not parse ${path}. Starting from scratch.`);
+        return [];
+    }
+}
 
 
