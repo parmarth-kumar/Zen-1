@@ -16,6 +16,22 @@ const ResearchModal: React.FC<ResearchModalProps> = ({ research, onClose }) => {
       <div className="bg-slate-900/95 backdrop-blur border border-slate-700/50 rounded-2xl w-full max-w-4xl max-h-[90vh] overflow-y-auto">
         {/* Header (No changes here) */}
         <div className="sticky top-0 bg-slate-900/95 backdrop-blur border-b border-slate-800/50 p-6">
+          <div className="flex items-start justify-between">
+            <div className="flex-1 pr-6">
+              <div className="flex items-center space-x-2 mb-3">
+                {categories && <category.icon className="w-5 h-5 text-blue-400" />}
+                <span className="px-3 py-1 bg-blue-500/20 border border-blue-500/30 rounded-full text-sm font-medium text-blue-300">
+                  {category?.name}
+                </span>
+                <span className="px-3 py-1 bg-gray-800/50 rounded-full text-sm text-gray-400">
+                  {research.year}
+                </span>
+              </div>
+              <h1 className="text-2xl font-bold text-slate-100 mb-4">{research.title}</h1>
+
+              
+            </div>
+          </div>
         </div>
       </div>
     </div>
