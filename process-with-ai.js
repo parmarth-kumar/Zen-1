@@ -17,17 +17,28 @@ const OUTPUT_JSON_PATH = './src/data/ai-generated-data.json;
 const BATCH_SIZE = 50; // nos. of research paper proccessed in one go
 const CATEGORIESS = ['plant-biology','radiation-effects','human-physiology','microbiology','cellular-biology'];
 
-// --- API & MODAL ---
+// --- API & MODEL ---
 if (!process.env.GEMINI_API_KEYS) {
   throw new Error("GEMINI_API_KEYS not found in .env file as comma-seperated list.");
 }
 const apiKeys = process.env.GEMINI_API_KEYS.split(',').map(k => k.trim());
 let currentKeyIndex = 0;
-let modal;
+let model;
 
 
-
-
+/* Rotates to the next API key and re-initializes the model*/
+function rotateApiKey(increment = true) {
+  if (increment) currentKeyIndex++;
+  if (currentKeyIndex >= apiKeys.length) {
+    console.error("🚨 All API keys have excceeded their quotas.");
+    return false;
+  }
+  console.log(`🔄 Switching to API key #${currentKeyIndex + 1}.`);
+  const genAI = new GoogleGenerativeAI(apiKeys[currentKeyIndex]);
+  model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" }); 
+  // at time of creating project these model works perfect too 'gemini-2.5-pro' or 'gemini-2.5-flash' or 'gemini-2.5-flash-lite'
+  return true
+}
 
 
 
