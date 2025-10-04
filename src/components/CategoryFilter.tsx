@@ -20,7 +20,7 @@ return(
       onClick ={()=> setIsOpen(!isOpen)}
       className="flex items-center space-x-2 px-3 py-1.5
        bg-gray-900/40 backdrop-blur-lg
-       border border-gray-900/60
+       border border-gray-800/60
        rounded-xl cursor-pointer hover:bg-gray-900/60
        transition-all shadow-md"
       >
@@ -53,7 +53,7 @@ return(
                          key={category.id}
                          onClick={() => {
                            onCategoryChange(category.id);//notify parent of category selection 
-                           setIsOpen(false): //close dropdown
+                           setIsOpen(false); //close dropdown
                          }}
                          className={`w-full flex items-center space-x-2 px-3 py-2 rounded-lg text-left transition-all 
                          ${selectedCategory === category.id
