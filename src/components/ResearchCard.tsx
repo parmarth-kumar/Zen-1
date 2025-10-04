@@ -42,10 +42,25 @@ const ResearchCard: React.FC<ResearchCardProps> = ({ research, onClick }) => {
           <span>{research.year}</span>
         </div>
 
-        
+        {/* The keyword logic is perfect, no changes needed */}
+        <div className="flex flex-wrap gap-1">
+          {research.keywords && research.keywords.slice(0, 3).map((keyword) => (
+            <span
+              key={keyword}
+              className="px-2 py-1 bg-slate-800/50 rounded-full text-xs text-slate-400"
+            >
+              {keyword}
+            </span>
+          ))}
+          {research.keywords && research.keywords.length > 3 && (
+            <span className="px-2 py-1 bg-slate-800/50 rounded-full text-xs text-slate-400">
+              +{research.keywords.length - 3} more
+            </span>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+};
 
-  
-
-
-
-
+export default ResearchCard;
