@@ -55,4 +55,25 @@ return(
                            onCategoryChange(category.id);//notify parent of category selection 
                            setIsOpen(false): //close dropdown
                          }}
+                         className={`w-full flex items-center space-x-2 px-3 py-2 rounded-lg text-left transition-all 
+                         ${selectedCategory === category.id
+                           ? 'bg-cyan-500/20 text-cyan-300 shadow-inner border border-cyan-400/30'
+                           : 'hover:bg-gray/10 text-gray-200 hover:text-white'
+                         }`}
+                         >
+                         {/*Category icon (dynamically passed from data)*/}
+                          <category.icon className="w-4 h-4 flex-shrink-0"/>
+
+                         {/*Category name*/}
+                          <span className ="text-sm font-medium truncate">{category.name}</span>
+                         </button>
+                     ))}
+                 </div>
+               </div>
+           )}
+        </div>
+      );
+};
+
+export default CategoryFilter;
 
