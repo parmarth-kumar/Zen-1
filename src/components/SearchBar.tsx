@@ -16,7 +16,14 @@ const SearchBar:React.FC<SeacrBarProps>=({searchTerm,onSearchChange,resultcount}
           <div className="flex items-center">
             <div className="flex items-center pl-4 pr-3">
               <Search className="w-5 h-5 text-gray-400"/>
-              </div>
+            </div>
+            <input
+              type="text"
+              value={searchTerm}
+              onChange={(e)=> onSearchChange(e.target.value)} </input>
+
+            
         
      
+
 
