@@ -66,6 +66,7 @@ const BioBackground: React.FC =() =>{
         ctx.arc(-offset,i-helixHeight /2,2,0, Math.PI *2);
         ctx.fillStyle = "rgba(0,255,255,0.6)";
         ctx.fill();
+        
         //right stand 
         ctx.beginPath();
         ctx.arc(-offset,i-helixHeight /2,2,0, Math.PI *2);
@@ -155,6 +156,18 @@ const BioBackground: React.FC =() =>{
     return () => window.removeEventListener("resize",resizeCanvas);
   }, []);
 
+  //render full-screen canvas 
+  return(
+    <canvas 
+      ref={canvasRef}
+      classNmae="fixed inset-0 w-full h-full pointer-events-none"
+      style={{xIndex: =}}
+    />
+  );
+};
+
+export default BioBackground;
+
   
     
       
@@ -164,6 +177,7 @@ const BioBackground: React.FC =() =>{
       
         
             
+
 
 
 
