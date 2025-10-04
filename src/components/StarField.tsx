@@ -90,7 +90,73 @@ const BioBackground: React.FC =() =>{
       //clear background 
       ctx.fillStyle = "rgba(5,10,20,1)";
       ctx.fillRect(0,0,canvas.width, canvas.height);
-      
+
+      //---Draw cells (background blobs)---
+      cells.forEach((c) => {
+        ctx.beginPath();
+        //soft radial gradient for glowing effect 
+        const gradient = ctx.createRadicalGradient(c.x,c.y,c.r*0.2,c.x,c.y,c.r);
+        gradient.addColorStop(0,"rgba(0,150,255,0.15)");
+        gradient.addColorStop(1,"rgba(0,150,255,0)");
+        ctx.fillStyle = gradient;
+        ctx.arc(c.x,c.y,c.r,0,Math.PI*2);
+        ctx.fill();
+
+        //move cell, wrap around edges 
+        c.x +=c.dx;
+        c.y +=c.dy;
+        if (c.x <-c.r) c.x = canvas.width +c.r;
+        if (c.x> canvas.width +c.r) c.x = -c.r;
+        if (c.y< -c.r) c.y = canvas.height + c.r;
+        if (c.y> canvas.height + c.r) c.y =-c.r;
+      });
+
+      //---Draw neuron network --- 
+      neurons.forEach((n) => {
+        //animate neuron pulse 
+        n.pulse += 0.05;
+        const opacity = 0.4 + 0.3 * Math.sin(n.pulse);
+
+        //draw neuron node 
+        ctx.beginPath();
+        ctx.arc(n.x,n.y,n.radius,0,Math.PI*2);
+        ctx.fillStyle = `rgba)0,255,200,${opacity})`;
+        ctx.fill();
+
+        //draw faint connections tonearby neurons 
+        neurons.forEach((m) => {
+          const dx = n.x - m.x;
+          const dy = n.y - m.y;
+          const dist = Math.sqrt(dx*dx+dy*dy);
+          if (dist<120){
+            ctx.beginPath();
+            ctx.moveTo(n.x,n.y);
+            ctx.lineTo(m.x,m.y);
+            ctx.strokeStyle= `rgba(0,200,255,${0.05})`;
+            ctx.lineWidth=0.5;
+            ctx.stroke();
+          }  
+        });
+      });
+
+      //--Draw DNA  helices--
+      helices.forEach((h) => {
+        //sway animation for helix 
+        const sway = Math.sin (time *0.002 +h.phase) * 0.05; //+-3 sway
+        drawDNAHelix(h.x,h.y,h.baseAngle + sway,time);
+      });
+
+      time++;
+      requestAnimationFrame(animate);
+    };
+    animate();
+
+    //cleanup even listener on unmount 
+    return () => window.removeEventListener("resize",resizeCanvas);
+  }, []);
+
+  
+    
       
       
         
@@ -98,6 +164,7 @@ const BioBackground: React.FC =() =>{
       
         
             
+
 
 
 
