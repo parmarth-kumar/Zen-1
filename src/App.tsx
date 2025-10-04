@@ -216,3 +216,95 @@ return (
     </div>
   </div>
 </section>
+
+{/* This is the big finale section where I'll show all the research results. */}
+<section className="relative z-10 py-12 px-4 sm:px-6 lg:px-8">
+  <div className="max-w-7xl mx-auto">
+
+    {/* Just a little header for this section to hold the title and the result count. */}
+    <div className="flex items-center justify-between mb-8">
+      {/* I made this title smart. It changes based on whether the user has searched for something. */}
+      <h2 className="text-2xl font-bold text-white">
+        {searchTerm ? `Search Results for "${searchTerm}"` : 'AI-Powered Research Insights'}
+      </h2>
+      {/* This shows how many results we found. It also correctly says "result" for one item and "results" for more. */}
+      <div className="text-sm text-gray-400">
+        {filteredResearch.length} {filteredResearch.length === 1 ? 'result' : 'results'}
+      </div>
+    </div>
+
+    {/* Now for the main logic. First, I check if our data is still loading. */}
+    {isLoading ? (
+      // If it is, I'll just show a simple "Loading..." message.
+      <div className="text-center py-16 text-gray-400">Loading AI-Enriched Data...</div>
+    ) : filteredResearch.length === 0 ? (
+      // If we're done loading and the filtered list is empty, then I'll show a "No results found" message.
+      <div className="text-center py-16">
+        <Search className="w-12 h-12 text-gray-600 mx-auto mb-4" />
+        <h3 className="text-lg font-medium text-gray-400 mb-2">No results found</h3>
+        <p className="text-gray-500">Try adjusting your search terms or category filter</p>
+      </div>
+    ) : (
+      // And finally, if we're not loading and we DO have results, I'll display them in a neat grid.
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {/* I'll loop through our filtered list of research items... */}
+        {filteredResearch.map((item) => (
+          // ...and for each item, I'll create a ResearchCard.
+          <ResearchCard
+            key={item.id} // The required React key.
+            research={item} // Pass the card all the data it needs to display.
+            // I'm also giving it a function so I know when a user clicks on it.
+            onClick={setSelectedResearch}
+          />
+        ))}
+      </div>
+    )}
+  </div>
+</section>
+</main>
+
+{/* And finally, I'm creating the footer for the very bottom of our page. */}
+<footer className="relative z-10 border-t border-gray-800/50 py-8 px-4 sm:px-6 lg-px-8 mt-16">
+  {/* Just a simple container to hold and center our footer text. */}
+  <div className="max-w-7xl mx-auto text-center text-sm text-gray-500">
+  
+    {/* This is our copyright line. I'm using a little bit of JavaScript here to make sure the year is always current. */}
+    <p>© {new Date().getFullYear()} Space Biology Knowledge Engine | Built for the NASA Space Apps Challenge.</p>
+    
+    {/* A quick note to give credit for the data we're using. */}
+    <p className="mt-2">
+      Data sourced from {/* I'm making the data source a clickable link. */}
+      <a 
+        href="https://github.com/jgalazka/SB_publications" 
+        target="_blank" // This makes sure the link opens in a new tab.
+        rel="noopener noreferrer" // These are just for good security practice.
+        className="text-blue-400 hover:underline" // Styling the link to look clickable.
+      >
+        NASA GeneLab
+      </a> 
+      and enriched with AI.
+    </p>
+    
+  </div>
+</footer>
+
+{/* This is a neat little trick in React for showing something conditionally. */}
+      {/* It means: "If `selectedResearch` has some data in it (i.e., it's not null)..." */}
+      {selectedResearch && (
+        <>
+          {/* "...then show our ResearchModal pop-up window." */}
+          <ResearchModal
+            // I'm passing the data of the specific paper the user clicked on into the modal.
+            research={selectedResearch}
+            // I'm also giving the modal a way to close itself. When it closes, we just clear out the selected research, which makes the modal hide again.
+            onClose={() => setSelectedResearch(null)}
+          />
+        </>
+      )}
+
+    </div> {/* This closes our main app container div from the very top. */}
+  ); {/* And here we're closing our entire return statement. */}
+}
+
+      {/*Finally, I'm exporting our App component so the rest of the application can use it */}
+export default App;
