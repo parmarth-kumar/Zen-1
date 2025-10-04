@@ -38,9 +38,24 @@ const SearchBar:React.FC<SeacrBarProps>=({searchTerm,onSearchChange,resultcount}
         </div>
       </div>
 
+      {searchTerm && (
+         <div className= " absolute top-full left-0 right-0 mt-2 p-3 bg-gray-900/90 backdrop-blur-sm border border-gray-700/50 rounded-lg">
+           <p className ="text-sm text-gray-300">
+           Found <span className ="font-semibold text-blue-400>{resultCount}</span> research{resultCount === 1? 'paper':'papers'} matching "<span className="text-white font-medium"> {searchTerm}</span>"
+         </p>
+        </div>
+      )}
+    </div>
+   );
+};
+
+export default SearchBar;
+
+
             
         
      
+
 
 
 
