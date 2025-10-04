@@ -41,8 +41,28 @@ const ResearchModal: React.FC<ResearchModalProps> = ({ research, onClose }) => {
                 </a>
               )}
 
-              
+              <div className="flex flex-wrap gap-4 text-sm text-gray-400">
+                {research.duration && research.duraton !== 'N/A' && (
+                  <div className="flex items-center space-x-1">
+                    <Timer className="w-4 h-4" />
+                    <span>{research.duration}</span>
+                  </div>
+                )}
+                {research.location && research.location !== 'Space & Ground Studies' && (
+                  <div className="flex items-center space-x-1">
+                    <MapPin className="w-4 h-4" />
+                    <span>{research.location}</span>
+                  </div>
+                )}
+                {research.organism && research.organism !== 'Various' && (
+                  <div className="flex items-center space-x-1">
+                    <User className="w-4 h-4" />
+                    <span>{research.organism}</span>
+                  </div>
+                )}
+              </div>
             </div>
+          
           </div>
         </div>
       </div>
