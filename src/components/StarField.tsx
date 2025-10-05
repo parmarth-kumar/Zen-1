@@ -38,7 +38,7 @@ const BioBackground: React.FC =() =>{
     }
     //--- Cells (background blobs)---
     //array of large , softly glowing cells that float around 
-    const cells:Array<any>=[];
+    const cells: Array<any> =[];
     for (let i=0; i<8; i++){
       cells.push({
         x: Math.random() * canvas.width,
@@ -58,7 +58,7 @@ const BioBackground: React.FC =() =>{
       const helixHeight=400;
       const spacing = 10;
       for (let i=0; i<helixHeight; i+=spacing) {
-        const phase =i*0.05 +time*0.02; // animate phase 
+        const phase =i*0.05 + time*0.02; // animate phase 
         const offset = Math.sin(phase) *20;
 
         //left stand 
@@ -69,7 +69,7 @@ const BioBackground: React.FC =() =>{
         
         //right stand 
         ctx.beginPath();
-        ctx.arc(-offset,i-helixHeight /2,2,0, Math.PI *2);
+        ctx.arc(offset,i-helixHeight /2,2,0, Math.PI *2);
         ctx.fillStyle = "rgba(255,0,255,0.6)";
         ctx.fill();
 
@@ -96,7 +96,7 @@ const BioBackground: React.FC =() =>{
       cells.forEach((c) => {
         ctx.beginPath();
         //soft radial gradient for glowing effect 
-        const gradient = ctx.createRadicalGradient(c.x,c.y,c.r*0.2,c.x,c.y,c.r);
+        const gradient = ctx.createRadialGradient(c.x,c.y,c.r*0.2,c.x,c.y,c.r);
         gradient.addColorStop(0,"rgba(0,150,255,0.15)");
         gradient.addColorStop(1,"rgba(0,150,255,0)");
         ctx.fillStyle = gradient;
@@ -121,7 +121,7 @@ const BioBackground: React.FC =() =>{
         //draw neuron node 
         ctx.beginPath();
         ctx.arc(n.x,n.y,n.radius,0,Math.PI*2);
-        ctx.fillStyle = `rgba)0,255,200,${opacity})`;
+        ctx.fillStyle = `rgba(0,255,200,${opacity})`;
         ctx.fill();
 
         //draw faint connections tonearby neurons 
@@ -161,7 +161,7 @@ const BioBackground: React.FC =() =>{
     <canvas 
       ref={canvasRef}
       classNmae="fixed inset-0 w-full h-full pointer-events-none"
-      style={{xIndex: =}}
+      style={{zIndex:0}}
     />
   );
 };
@@ -177,6 +177,7 @@ export default BioBackground;
       
         
             
+
 
 
 
