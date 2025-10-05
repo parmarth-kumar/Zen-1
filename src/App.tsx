@@ -257,15 +257,33 @@ function App() {
 // It credits NASA GeneLab as the data source with a clickable link that opens in a new tab.
 // The footer text and link have styling to fit the overall app theme and provide clear information. */}
 
-      <footer className="relative z-10 border-t border-gray-800/50 py-8 px-4 sm:px-6 lg:px-8 mt-16">
-        <div className="max-w-7xl mx-auto text-center text-sm text-gray-500">
-          <p>© {new Date().getFullYear()} Space Biology Knowledge Engine | Built for the NASA Space Apps Challenge.</p>
-          <p className="mt-2">
-            Data sourced from <a href="https://github.com/jgalazka/SB_publications" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:underline">NASA GeneLab</a> and enriched with AI.
-          </p>
-        </div>
-      </footer>
+ import React from 'react';
 
+const Footer = () => {
+  return (
+    <footer className="relative z-10 border-t border-gray-800/50 py-8 px-4 sm:px-6 lg:px-8 mt-16">
+      <div className="max-w-7xl mx-auto text-center text-sm text-gray-500">
+        <p>
+          © {new Date().getFullYear()} Space Biology Knowledge Engine | Built for the NASA Space Apps Challenge by{' '}
+          <a 
+            href="https://www.spaceappschallenge.org/2025/find-a-team/zen-1/" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="underline hover:text-gray-300"
+          >
+            Team ZeN - 1
+          </a>.
+        </p>
+        <p className="mt-2">
+          Data sourced from <a href="https://genelab.nasa.gov/" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:underline">NASA GeneLab</a> and enriched with AI.
+        </p>
+      </div>
+    </footer>
+  );
+};
+
+export default Footer;
+      
     {/* // This code shows a ResearchModal only if a research item is selected.
 // The modal receives the selected research data to display its details.
 // When the modal is closed, it clears the selectedResearch state to hide the modal.
