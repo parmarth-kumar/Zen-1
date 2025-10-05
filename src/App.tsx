@@ -257,7 +257,7 @@ function App() {
 // It credits NASA GeneLab as the data source with a clickable link that opens in a new tab.
 // The footer text and link have styling to fit the overall app theme and provide clear information. */}
 
- import React from 'react';
+
 
 const Footer = () => {
   return (
