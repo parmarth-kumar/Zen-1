@@ -160,7 +160,7 @@ const BioBackground: React.FC =() =>{
   return(
     <canvas 
       ref={canvasRef}
-      classNmae="fixed inset-0 w-full h-full pointer-events-none"
+      className="fixed inset-0 w-full h-full pointer-events-none"
       style={{zIndex:0}}
     />
   );
@@ -177,6 +177,7 @@ export default BioBackground;
       
         
             
+
 
 
 
