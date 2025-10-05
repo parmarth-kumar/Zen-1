@@ -131,7 +131,7 @@ function App() {
             />
             <div className="mt-4 flex flex-wrap justify-center gap-3 text-sm">
               <span className="text-gray-400">Popular searches:</span>
-              {['astronaut', 'stem cells', 'plant growth', 'radiation', 'microgravity'].map((term) => (
+              {['Microgravity', 'Radiation', 'Human Physiology', 'Plant Growth', 'Gene Expression', 'Stem Cells'].map((term) => (
                 <button
                   key={term}
                   onClick={() => setSearchTerm(term)}
