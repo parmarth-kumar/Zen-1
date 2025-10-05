@@ -25,7 +25,7 @@ function App() {
     setAllResearchData(aiGeneratedData as ResearchItem[]);
     setIsLoading(false);
   }, []);
-}
+
 
 // Creates a filtered list of research papers based on the search and category.
 const filteredResearch = useMemo(() => {
