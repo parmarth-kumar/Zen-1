@@ -264,14 +264,6 @@ function App() {
           <p>© {new Date().getFullYear()} Space Biology Knowledge Engine | Built for the NASA Space Apps Challenge.</p>
           <p className="mt-2">
             Data sourced from <a href="https://github.com/jgalazka/SB_publications" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:underline">NASA GeneLab</a> and enriched with AI.
-            <a 
-            href="https://www.spaceappschallenge.org/2025/find-a-team/zen-1/" 
-            target="_blank" 
-            rel="noopener noreferrer"
-            className="underline hover:text-gray-300"
-          >
-            Team ZeN - 1
-          </a>.
           </p>
         </div>
       </footer>
