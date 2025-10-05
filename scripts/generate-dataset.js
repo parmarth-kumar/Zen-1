@@ -9,13 +9,13 @@ import * as cheerio from 'cheerio';
 import fs from 'fs';
 import Papa from 'papaparse';
 import { GoogleGenerativeAI} from '@google/generative-ai';
-import 'detenv/config';
+import 'dotenv/config';
 
 // --- CONFIGURATIONS ---
 const CSV_URL = 'https://raw.githubusercontent.com/jgalazka/SB_publications/main/SB_publication_PMC.csv';
 const OUTPUT_JSON_PATH = './src/data/ai-generated-data.json';
 const BATCH_SIZE = 50; // nos. of research paper processed in one go
-const CATEGORIESS = ['plant-biology','radiation-effects','human-physiology','microbiology','cellular-biology'];
+const CATEGORIES = ['plant-biology','radiation-effects','human-physiology','microbiology','cellular-biology'];
 
 // --- API & MODEL ---
 if (!process.env.GEMINI_API_KEYS) {
