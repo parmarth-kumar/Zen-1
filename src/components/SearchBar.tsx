@@ -1,4 +1,11 @@
 import React from 'react';
+import {Search,Sparkles} from 'lucide-react';
+
+interface SearchBarProps {
+  searchTerm: string;
+  onSearchChange:(value:string)=> void;
+  resultCount:number;
+}
 import { Search,Sparkles} from 'lucide-react'; //lucide provides lightweight SVG icons
 
 interface SearchBarProps{
